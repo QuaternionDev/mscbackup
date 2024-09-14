@@ -17,16 +17,28 @@ class BackupApp:
         self.destination_folder = tk.StringVar()
 
         # GUI elemek
-        tk.Label(root, text="Forrás mappa:").grid(row=0, column=0, padx=10, pady=10)
-        tk.Entry(root, textvariable=self.source_folder, width=40).grid(row=0, column=1, padx=10)
-        tk.Button(root, text="Tallózás", command=self.select_source_folder).grid(row=0, column=2, padx=10)
+        self.language_selector = tk.OptionMenu(root, self.language, *LANGUAGES.keys(), command=self.update_language)
+        self.language_selector.grid(row=0, column=1, padx=10, pady=10)
 
-        tk.Label(root, text="Cél mappa:").grid(row=1, column=0, padx=10, pady=10)
-        tk.Entry(root, textvariable=self.destination_folder, width=40).grid(row=1, column=1, padx=10)
-        tk.Button(root, text="Tallózás", command=self.select_destination_folder).grid(row=1, column=2, padx=10)
+        self.source_label = tk.Label(root, text=self.translations['source_label'])
+        self.source_label.grid(row=1, column=0, padx=10, pady=10)
+        self.source_entry = tk.Entry(root, textvariable=self.source_folder, width=40)
+        self.source_entry.grid(row=1, column=1, padx=10)
+        self.source_button = tk.Button(root, text=self.translations['browse'], command=self.select_source_folder)
+        self.source_button.grid(row=1, column=2, padx=10)
 
-        tk.Button(root, text="Manuális mentés", command=self.manual_backup).grid(row=2, column=0, columnspan=3, pady=10)
-        tk.Button(root, text="12 óránkénti mentés indítása", command=self.start_scheduled_backup).grid(row=3, column=0, columnspan=3, pady=10)
+        self.destination_label = tk.Label(root, text=self.translations['destination_label'])
+        self.destination_label.grid(row=2, column=0, padx=10, pady=10)
+        self.destination_entry = tk.Entry(root, textvariable=self.destination_folder, width=40)
+        self.destination_entry.grid(row=2, column=1, padx=10)
+        self.destination_button = tk.Button(root, text=self.translations['browse'],command=self.select_destination_folder)
+        self.destination_button.grid(row=2, column=2, padx=10)
+
+        self.manual_backup_button = tk.Button(root, text=self.translations['manual_backup'], command=self.manual_backup)
+        self.manual_backup_button.grid(row=3, column=0, columnspan=3, pady=10)
+
+        self.schedule_button = tk.Button(root, text=self.translations['start_schedule'], command=self.start_scheduled_backup)
+        self.schedule_button.grid(row=4, column=0, columnspan=3, pady=10)
 
     def select_source_folder(self):
         folder_selected = filedialog.askdirectory()
