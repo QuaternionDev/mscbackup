@@ -40,6 +40,18 @@ class BackupApp:
         self.schedule_button = tk.Button(root, text=self.translations['start_schedule'], command=self.start_scheduled_backup)
         self.schedule_button.grid(row=4, column=0, columnspan=3, pady=10)
 
+        def update_language(self, event=None):
+        """Frissíti a felület szövegeit a kiválasztott nyelv szerint."""
+        self.translations = LANGUAGES[self.language.get()]
+
+        # Szövegek frissítése
+        self.source_label.config(text=self.translations['source_label'])
+        self.destination_label.config(text=self.translations['destination_label'])
+        self.source_button.config(text=self.translations['browse'])
+        self.destination_button.config(text=self.translations['browse'])
+        self.manual_backup_button.config(text=self.translations['manual_backup'])
+        self.schedule_button.config(text=self.translations['start_schedule'])
+
     def select_source_folder(self):
         folder_selected = filedialog.askdirectory()
         self.source_folder.set(folder_selected)
