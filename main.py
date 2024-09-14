@@ -109,11 +109,11 @@ class BackupApp:
         destination = self.destination_folder.get()
 
         if not os.path.exists(source):
-            messagebox.showerror("Hiba", "A forrás mappa nem létezik!")
+            messagebox.showerror("Error", self.translations['source_error'])
             return
 
         if not os.path.exists(destination):
-            messagebox.showerror("Hiba", "A cél mappa nem létezik!")
+            messagebox.showerror("Error", self.translations['destination_error'])
             return
 
         try:
