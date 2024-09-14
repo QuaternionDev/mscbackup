@@ -15,6 +15,10 @@ class BackupApp:
         # Forrás és cél mappa változók
         self.source_folder = tk.StringVar()
         self.destination_folder = tk.StringVar()
+        self.language = tk.StringVar(value='en') # Alapértelmezett nyelv
+
+        # Fordítási elemek
+        self.translations = LANGUAGES[self.languages.get()]
 
         # GUI elemek
         self.language_selector = tk.OptionMenu(root, self.language, *LANGUAGES.keys(), command=self.update_language)
