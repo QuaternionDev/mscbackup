@@ -7,6 +7,46 @@ import time
 from threading import Thread
 from datetime import datetime
 
+# Nyelvi szövegek
+LANGUAGES = {
+    'hu': {
+        'source_label': 'Forrás mappa:',
+        'destination_label': 'Cél mappa:',
+        'browse': 'Tallózás',
+        'manual_backup': 'Manuális mentés',
+        'start_schedule': '12 óránkénti mentés indítása',
+        'success': 'Sikeresen elmentve ide:',
+        'error': 'Hiba történt a mentés során:',
+        'source_error': 'A forrás mappa nem létezik!',
+        'destination_error': 'A cél mappa nem létezik, vagy nem elérhető! Amennyiben szervert vagy NAS rendszert használd, ellenőrizd annak elérhetőségét!',
+        'schedule_started': '12 óránkénti mentés elindítva!',
+    },
+    'en': {
+        'source_label': 'Source folder:',
+        'destination_label': 'Destination folder:',
+        'browse': 'Browse',
+        'manual_backup': 'Manual Backup',
+        'start_schedule': 'Start 12-hour scheduled backup',
+        'success': 'Successfully backed up to:',
+        'error': 'Error occurred during backup:',
+        'source_error': 'Source folder does not exist!',
+        'destination_error': 'The target folder does not exist or is not available! If you use a server or NAS system, check its availability!',
+        'schedule_started': '12-hour scheduled backup started!',
+    },
+    'de': {
+        'source_label': 'Quellordner:',
+        'destination_label': 'Zielordner:',
+        'browse': 'Durchsuchen',
+        'manual_backup': 'Manuelle Sicherung',
+        'start_schedule': 'Starten Sie die 12-Stunden-Sicherung',
+        'success': 'Erfolgreich gesichert:',
+        'error': 'Während der Sicherung ist ein Fehler aufgetreten:',
+        'source_error': 'Quellordner existiert nicht!',
+        'destination_error': 'Der Zielordner existiert nicht oder ist nicht verfügbar! Wenn Sie einen Server oder ein NAS-System nutzen, prüfen Sie dessen Verfügbarkeit!',
+        'schedule_started': '12-Stunden-Plan-Backup gestartet!',
+    }
+}
+
 class BackupApp:
     def __init__(self, root):
         self.root = root
