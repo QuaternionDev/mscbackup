@@ -120,16 +120,16 @@ class BackupApp:
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             destination_path = os.path.join(destination, f"backup_{timestamp}")
             shutil.copytree(source, destination_path)
-            messagebox.showinfo("Siker", f"Sikeresen elmentve ide: {destination_path}")
+            messagebox.showinfo("Success", f"{self.translations['success']} {destination_path}")
         except Exception as e:
-            messagebox.showerror("Hiba", f"Hiba történt a mentés során: {e}")
+            messagebox.showerror("Error", f"{self.translations['error']} {e}")
 
     def start_scheduled_backup(self):
         source = self.source_folder.get()
         destination = self.destination_folder.get()
 
         if not os.path.exists(source) or not os.path.exists(destination):
-            messagebox.showerror("Hiba", "Állítsd be a forrás- és célmappát!")
+            messagebox.showerror("Error", self.translations['source_error'])
             return
 
         # Ütemezett mentés 12 óránként
@@ -140,7 +140,7 @@ class BackupApp:
         t.daemon = True
         t.start()
 
-        messagebox.showinfo("Ütemezés", "12 óránkénti mentés elindítva!")
+        messagebox.showinfo("Schedule", self.translations['schedule_started'])
 
     def scheduled_backup(self):
         source = self.source_folder.get()
@@ -153,9 +153,9 @@ class BackupApp:
                 shutil.copytree(source, destination_path)
                 print(f"Sikeres mentés: {destination_path}")
             except Exception as e:
-                print(f"Hiba történt a mentés során: {e}")
+                print(f"{self.translations['error']} {e}")
         else:
-            print("A forrás vagy cél mappa nem elérhető.")
+            print(self.translations['source_error'])
 
     def run_scheduler(self):
         while True:
