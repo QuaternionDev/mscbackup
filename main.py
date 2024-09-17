@@ -7,7 +7,7 @@ import time
 from threading import Thread
 from datetime import datetime
 
-# Nyelvi szövegek
+# Language elements
 LANGUAGES = {
     'hu': {
         'source_label': 'Forrás mappa:',
@@ -52,15 +52,15 @@ class BackupApp:
         self.root = root
         self.root.title("MSC Backup")
 
-        # Forrás és cél mappa változók
+        # Source & Destination folder variables
         self.source_folder = tk.StringVar()
         self.destination_folder = tk.StringVar()
-        self.language = tk.StringVar(value='en') # Alapértelmezett nyelv
+        self.language = tk.StringVar(value='en') # Default Language
 
-        # Fordítási elemek
+        # Translation elements
         self.translations = LANGUAGES[self.languages.get()]
 
-        # GUI elemek
+        # GUI elements
         self.language_selector = tk.OptionMenu(root, self.language, *LANGUAGES.keys(), command=self.update_language)
         self.language_selector.grid(row=0, column=1, padx=10, pady=10)
 
@@ -132,10 +132,10 @@ class BackupApp:
             messagebox.showerror("Error", self.translations['source_error'])
             return
 
-        # Ütemezett mentés 12 óránként
+        # Scheduled backup every 12-hour
         schedule.every(12).hours.do(self.scheduled_backup)
 
-        # Háttérszál indítása az ütemezett feladatokhoz
+        # Start background thread for scheduled tasks
         t = Thread(target=self.run_scheduler)
         t.daemon = True
         t.start()
@@ -160,9 +160,9 @@ class BackupApp:
     def run_scheduler(self):
         while True:
             schedule.run_pending()
-            time.sleep(60)  # Ellenőriz minden percben
+            time.sleep(60)  # Checks in every minute
 
-# Fő program
+# Main program
 if __name__ == "__main__":
     root = tk.Tk()
     app = BackupApp(root)
